@@ -65,6 +65,21 @@
         { group: sampleGroups[5], title: "Item Title: 8", subtitle: "Item Subtitle: 8", description: itemDescription, content: itemContent, backgroundImage: lightGray }
     ];
 
+    var sampleItems = [
+        {
+            type: "text",
+            text: "Hello, my name is Benson",
+            source: "http://vrwarp.com",
+            date: new Date("01/01/2011")
+        },
+        {
+            type: "text",
+            text: "Time to die",
+            source: "http://azdogs.com",
+            date: new Date("05/07/2012")
+        }
+    ];
+
     // Get a reference for an item, using the group key and item title as a
     // unique reference to the item that can be easily serialized.
     function getItemReference(item) {
@@ -96,8 +111,13 @@
 
     var list = new WinJS.Binding.List();
     var groupedItems = list.createGrouped(
-        function groupKeySelector(item) { return item.group.key; },
-        function groupDataSelector(item) { return item.group; }
+        function groupKeySelector(item) { 
+            return item.date.getMonth() + "/" + item.date.getYear() ;
+        },
+        function groupDataSelector(item) {
+            var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+            return months[item.date.getMonth()] + ' ' + item.date.getYear(); 
+        }
     );
 
     // TODO: Replace the data with your real data.
