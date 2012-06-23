@@ -59,9 +59,6 @@
     <Content Include="js\default.js" />
     <Content Include="js\navigator.js" />
     <Content Include="js\target.js" />
-    <Content Include="pages\timeline\timeline.css" />
-    <Content Include="pages\timeline\timeline.html" />
-    <Content Include="pages\timeline\timeline.js" />
     <Content Include="sharetarget.html" />
     <Content Include="pages\itemDetail\itemDetail.css" />
     <Content Include="pages\itemDetail\itemDetail.html" />
