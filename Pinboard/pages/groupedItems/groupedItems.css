@@ -25,6 +25,7 @@
         }
 
     .groupeditemspage .groupeditemslist .win-item {
+        background: #eee;
         -ms-grid-columns: 1fr;
         -ms-grid-rows: 1fr 90px;
         display: -ms-grid;

@@ -112,11 +112,14 @@
     var list = new WinJS.Binding.List();
     var groupedItems = list.createGrouped(
         function groupKeySelector(item) { 
-            return item.date.getMonth() + "/" + item.date.getYear() ;
+            return item.date.getMonth() + "/" + item.date.getFullYear() ;
         },
         function groupDataSelector(item) {
             var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-            return months[item.date.getMonth()] + ' ' + item.date.getYear(); 
+            var group = {
+                title: months[item.date.getMonth()] + ' ' + item.date.getFullYear()
+            };
+            return group;
         }
     );
 
