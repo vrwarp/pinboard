@@ -27,7 +27,6 @@
         var appbar = document.getElementById("appbar");
         appbar.winControl.sticky = false;
         appbar.winControl.hide();
-        hideItemCommands();
         if (element != null) element.focus();
     }
 
