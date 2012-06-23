@@ -26,7 +26,7 @@
         </InitialRotationPreference>
       </VisualElements>
       <Extensions>
-        <Extension Category="windows.shareTarget">
+        <Extension Category="windows.shareTarget" StartPage="sharetarget.html">
           <ShareTarget>
             <DataFormat>URI</DataFormat>
           </ShareTarget>
