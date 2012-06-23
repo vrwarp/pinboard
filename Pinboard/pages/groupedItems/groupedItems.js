@@ -7,6 +7,31 @@
     var ui = WinJS.UI;
     var utils = WinJS.Utilities;
 
+    function showAppBar(currentItem) {
+        // Get the app bar.
+        var element = document.activeElement;
+        var appbar = document.getElementById("appbar");
+
+        // Keep the app bar open after it's shown.
+        appbar.winControl.sticky = true;
+
+        // Show the app bar.
+        appbar.winControl.show();
+
+        // Return focus to the original item which invoked the app bar.
+        if (element != null) element.focus();
+    }
+
+    function hideAppBar() {
+        var element = document.activeElement;
+        var appbar = document.getElementById("appbar");
+        appbar.winControl.sticky = false;
+        appbar.winControl.hide();
+        hideItemCommands();
+        if (element != null) element.focus();
+    }
+
+
     ui.Pages.define("/pages/groupedItems/groupedItems.html", {
 
         // This function updates the ListView with new layouts
@@ -36,6 +61,18 @@
             }
         },
 
+        itemSelected: function (eventObject) {
+            var listView = document.querySelector(".groupeditemslist").winControl;
+
+            if (listView.selection.count() === 0) {
+                hideAppBar();
+            } else {
+                listView.selection.getItems().then(function (items) {
+                    showAppBar(items[0]);
+                });
+            }
+        },
+
         // This function is called whenever a user navigates to this page. It
         // populates the page elements with the app's data.
         ready: function (element, options) {
@@ -46,6 +83,9 @@
 
             this.initializeLayout(listView, appView.value);
             listView.element.focus();
+
+            listView.onselectionchanged = this.itemSelected.bind(this);
+            appbar.winControl.disabled = false;
         },
 
         // This function updates the page layout in response to viewState changes.
