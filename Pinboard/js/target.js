@@ -296,7 +296,13 @@
     WinJS.Application.start();
 
     function initialize() {
-
+        document.getElementById("addQuickLink").addEventListener("change", /*@static_cast(EventListener)*/addQuickLinkChanged, false); 
+        document.getElementById("reportCompleted").addEventListener("click", /*@static_cast(EventListener)*/reportCompleted, false); 
+        document.getElementById("expandoClick").addEventListener("click", /*@static_cast(EventListener)*/expandoClick, false); 
+        document.getElementById("reportStarted").addEventListener("click", /*@static_cast(EventListener)*/reportStarted, false); 
+        document.getElementById("reportDataRetrieved").addEventListener("click", /*@static_cast(EventListener)*/reportDataRetrieved, false); 
+        document.getElementById("reportSubmittedBackgroundTask").addEventListener("click", /*@static_cast(EventListener)*/reportSubmittedBackgroundTask, false); 
+        document.getElementById("reportError").addEventListener("click", /*@static_cast(EventListener)*/reportError, false); 
     }
 
     document.addEventListener("DOMContentLoaded", initialize, false);
