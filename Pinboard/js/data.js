@@ -74,7 +74,7 @@
     );
 
     var applicationData = Windows.Storage.ApplicationData.current;
-    var roamingFolder = applicationData.roamingFolder;
+    var roamingFolder = WinJS.Application.roaming.folder;
     function updateData() {
         while (list.pop()) { }
         roamingFolder.getFilesAsync().done(
@@ -97,7 +97,6 @@
 
     var query = roamingFolder.createFolderQuery();
     query.addEventListener("contentschanged", updateData());
-    query.getItemCountAsync();
     updateData();
 
     WinJS.Application.Data = {
