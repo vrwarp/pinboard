@@ -66,13 +66,24 @@
     /// outside the activation handler 
     /// </summary> 
     function shareReady(eventArgs) {
+        var applicationData = Windows.Storage.ApplicationData.current;
+        var roamingFolder = applicationData.roamingFolder;
+        var filename = "file" + Math.floor(Math.random() * 1024 * 1024);
+        roamingFolder.createFileAsync(filename,
+            Windows.Storage.CreationCollisionOption.replaceExisting).then(
+            function write(file) {
+                var jsonData = JSON.stringify({
+                    "title": shareOperation.data.properties.title,
+                });
+                Windows.Storage.FileIO.writeTextAsync(file, jsonData).done(
+                    applicationData.signalDataChanged());
+            }).done(function debug(){
+                debugger;
+            });
+
         document.getElementById("title").innerText = shareOperation.data.properties.title;
         document.getElementById("description").innerText = shareOperation.data.properties.description;
-        // If this app was activated via a QuickLink, display the QuickLinkId 
-        if (shareOperation.quickLinkId !== "") {
-            document.getElementById("selectedQuickLinkId").innerText = shareOperation.quickLinkId;
-            document.getElementById("quickLinkArea").className = "hidden";
-        }
+
         // Display a thumbnail if available 
         if (shareOperation.data.properties.thumbnail) {
             shareOperation.data.properties.thumbnail.openReadAsync().done(function (thumbnailStream) {
@@ -82,17 +93,20 @@
                 document.getElementById("thumbnailArea").className = "unhidden";
             });
         }
+
         // Display the data received based on data type 
         if (shareOperation.data.contains(Windows.ApplicationModel.DataTransfer.StandardDataFormats.text)) {
             shareOperation.data.getTextAsync().done(function (text) {
                 displayContent("Text: ", text, false);
             });
         }
+
         if (shareOperation.data.contains(Windows.ApplicationModel.DataTransfer.StandardDataFormats.uri)) {
             shareOperation.data.getUriAsync().done(function (uri) {
                 displayContent("Uri: ", uri.rawUri, false);
             });
         }
+
         if (shareOperation.data.contains(Windows.ApplicationModel.DataTransfer.StandardDataFormats.storageItems)) {
             shareOperation.data.getStorageItemsAsync().done(function (storageItems) {
                 var fileList = "";
@@ -223,42 +237,7 @@
     /// Call the reportCompleted API with the proper quicklink (if needed) 
     /// </summary> 
     function reportCompleted() {
-        var addQuickLink = document.getElementById("addQuickLink").checked;
-        if (addQuickLink) {
-            var el;
-            var quickLink = new Windows.ApplicationModel.DataTransfer.ShareTarget.QuickLink();
-
-            var quickLinkId = document.getElementById("quickLinkId").value;
-            if ((typeof quickLinkId !== "string") || (quickLinkId === "")) {
-                el = document.getElementById("quickLinkError");
-                el.className = "unhidden";
-                el.innerText = "Missing QuickLink ID";
-                return;
-            }
-            quickLink.id = quickLinkId;
-
-            var quickLinkTitle = document.getElementById("quickLinkTitle").value;
-            if ((typeof quickLinkTitle !== "string") || (quickLinkTitle === "")) {
-                el = document.getElementById("quickLinkError");
-                el.className = "unhidden";
-                el.innerText = "Missing QuickLink title";
-                return;
-            }
-            quickLink.title = quickLinkTitle;
-
-            // For quicklinks, the supported FileTypes and DataFormats are set independently from the manifest 
-            var dataFormats = Windows.ApplicationModel.DataTransfer.StandardDataFormats;
-            quickLink.supportedFileTypes.replaceAll(["*"]);
-            quickLink.supportedDataFormats.replaceAll([dataFormats.text, dataFormats.uri, dataFormats.bitmap, dataFormats.storageItems, dataFormats.html, customFormatName]);
-
-            // Prepare the icon for a QuickLink 
-            Windows.ApplicationModel.Package.current.installedLocation.getFileAsync("images\\user.png").done(function (iconFile) {
-                quickLink.thumbnail = Windows.Storage.Streams.RandomAccessStreamReference.createFromFile(iconFile);
-                shareOperation.reportCompleted(quickLink);
-            });
-        } else {
-            shareOperation.reportCompleted();
-        }
+        shareOperation.reportCompleted();
     }
 
     /// <summary> 

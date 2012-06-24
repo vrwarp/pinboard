@@ -5,6 +5,7 @@
     var nav = WinJS.Navigation;
     var ui = WinJS.UI;
     var utils = WinJS.Utilities;
+    var Data = WinJS.Application.Data;
 
     ui.Pages.define("/pages/groupDetail/groupDetail.html", {
 

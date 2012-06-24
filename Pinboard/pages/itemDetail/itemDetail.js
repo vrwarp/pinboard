@@ -3,6 +3,7 @@
 
     var ui = WinJS.UI;
     var utils = WinJS.Utilities;
+    var Data = WinJS.Application.Data;
 
     ui.Pages.define("/pages/itemDetail/itemDetail.html", {
         // This function is called whenever a user navigates to this page. It

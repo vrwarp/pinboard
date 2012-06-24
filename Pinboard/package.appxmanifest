@@ -28,7 +28,14 @@
       <Extensions>
         <Extension Category="windows.shareTarget" StartPage="sharetarget.html">
           <ShareTarget>
+            <SupportedFileTypes>
+              <SupportsAnyFileType />
+            </SupportedFileTypes>
             <DataFormat>URI</DataFormat>
+            <DataFormat>Bitmap</DataFormat>
+            <DataFormat>HTML</DataFormat>
+            <DataFormat>Text</DataFormat>
+            <DataFormat>RTF</DataFormat>
           </ShareTarget>
         </Extension>
       </Extensions>
