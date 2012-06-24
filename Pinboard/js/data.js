@@ -100,8 +100,8 @@
     var roamingFolder = WinJS.Application.roaming.folder;
     function updateData() {
         while (list.pop()) { }
-        roamingFolder.getFilesAsync().done(
-            function done(files) {
+        roamingFolder.getFilesAsync().then(
+            function gotFiles(files) {
                 files.forEach(
                     function process(file) {
                         Windows.Storage.FileIO.readTextAsync(file).done(
@@ -109,6 +109,7 @@
                                 try {
                                     var obj = JSON.parse(text);
                                     if (obj.version >= minVersion) {
+                                        obj.date = new Date(obj.date);
                                         list.push(obj);
                                     }
                                 }
@@ -117,12 +118,16 @@
                                 }
                             }, function error(e) { } );
                     })
-            }, function error(e) { } );
+            }).done(
+            function done() {
 
-        // Add dummy data - REMOVE LATER
-        sampleItems.forEach(function (item) {
-            list.push(item);
-        });
+                // Add dummy data - REMOVE LATER
+                sampleItems.forEach(function (item) {
+                    list.push(item);
+                });
+
+                list.notifyReload();
+            });
     }
 
     applicationData.addEventListener("datachanged", updateData);
