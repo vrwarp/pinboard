@@ -21,10 +21,10 @@
             onclick="WinJS.Navigation.navigate('/pages/groupDetail/groupDetail.html', { groupKey: event.srcElement.groupKey })" role="link"></p>
     </div>
     <div class="itemtemplate" data-win-control="WinJS.Binding.Template">
-        <img class="item-image" src="#" data-win-bind="src: backgroundImage; alt: title" />
+        <!--<img class="item-image" src="#" data-win-bind="src: backgroundImage; alt: title" />-->
         <div class="item-overlay">
-            <h4 class="item-title" data-win-bind="textContent: title"></h4>
-            <h6 class="item-subtitle win-type-ellipsis" data-win-bind="textContent: subtitle"></h6>
+            <h4 class="item-title" data-win-bind="textContent: text"></h4>
+            <!--<h6 class="item-subtitle win-type-ellipsis" data-win-bind="textContent: group"></h6>-->
         </div>
     </div>
 
@@ -37,7 +37,7 @@
             </h1>
         </header>
         <section aria-label="Main content" role="main">
-            <div class="groupeditemslist" aria-label="List of groups" data-win-control="WinJS.UI.ListView" data-win-options="{ selectionMode: 'none' }"></div>
+            <div class="groupeditemslist" aria-label="List of groups" data-win-control="WinJS.UI.ListView" data-win-options="{ selectionMode: 'multi' }"></div>
         </section>
     </div>
 </body>

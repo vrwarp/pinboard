@@ -15,6 +15,21 @@
         { key: "group1", title: "Group Title: 1", subtitle: "Group Subtitle: 1", backgroundImage: darkGray, description: groupDescription },
     ];
 
+    var sampleItems = [
+        {
+            type: "text",
+            text: "Hello, my name is Benson",
+            source: "http://vrwarp.com",
+            date: new Date("01/01/2011")
+        },
+        {
+            type: "text",
+            text: "Time to die",
+            source: "http://azdogs.com",
+            date: new Date("05/07/2012")
+        }
+    ];
+
     // Get a reference for an item, using the group key and item title as a
     // unique reference to the item that can be easily serialized.
     function getItemReference(item) {
@@ -46,8 +61,16 @@
 
     var list = new WinJS.Binding.List();
     var groupedItems = list.createGrouped(
-        function groupKeySelector(item) { return sampleGroups[0].key; },
-        function groupDataSelector(item) { return sampleGroups[0]; }
+        function groupKeySelector(item) { 
+            return item.date.getMonth() + "/" + item.date.getFullYear() ;
+        },
+        function groupDataSelector(item) {
+            var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+            var group = {
+                title: months[item.date.getMonth()] + ' ' + item.date.getFullYear()
+            };
+            return group;
+        }
     );
 
     var applicationData = Windows.Storage.ApplicationData.current;
