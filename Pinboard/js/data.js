@@ -77,7 +77,29 @@
             text: "Time to die",
             source: "http://azdogs.com",
             date: new Date("05/07/2012")
+        },
+        {
+            type: "photo",
+            photo: "http://placekitten.com/200/300",
+            source: "http://placekitten.com",
+            date: new Date()
+        },
+        {
+            type: "video",
+            video: "http://www.youtube.com/watch?v=CQzUsTFqtW0",
+            title: "Skateboarding Dog",
+            source: "http://www.youtube.com/watch?v=CQzUsTFqtW0",
+            date: new Date()
+        },
+        {
+            type: "audio",
+            audio: "http://soundcloud.com/nomad-soul-collective/murmuration",
+            title: "Murmuration",
+            artist: "Nomad Soul Collective",
+            source: "http://soundcloud.com/nomad-soul-collective/murmuration",
+            date: new Date()
         }
+
     ];
 
     // Get a reference for an item, using the group key and item title as a
