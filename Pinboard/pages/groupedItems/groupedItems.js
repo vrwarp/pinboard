@@ -73,12 +73,31 @@
             }
         },
 
+        itemTemplate: function (itemPromise) {
+            return itemPromise.then(function (item) {
+                switch (item.data.type) {
+                    case 'text':
+                        var template = document.querySelector(".texttemplate");
+                        break;
+                    case 'photo':
+                        var template = document.querySelector(".phototemplate");
+                        break;
+                    default:
+                        var template = document.querySelector(".texttemplate");
+                        break;
+                }
+                var container = document.createElement("div");
+                template.winControl.render(item.data, container);
+                return container;
+            });
+        },
+
         // This function is called whenever a user navigates to this page. It
         // populates the page elements with the app's data.
         ready: function (element, options) {
             var listView = element.querySelector(".groupeditemslist").winControl;
             listView.groupHeaderTemplate = element.querySelector(".headerTemplate");
-            listView.itemTemplate = element.querySelector(".itemtemplate");
+            listView.itemTemplate = this.itemTemplate;
             listView.oniteminvoked = this.itemInvoked.bind(this);
 
             this.initializeLayout(listView, appView.value);
