@@ -115,6 +115,11 @@
                             }, function error(e) { } );
                     })
             }, function error(e) { } );
+
+        // Add dummy data - REMOVE LATER
+        sampleItems.forEach(function (item) {
+            list.push(item);
+        });
     }
 
     var query = roamingFolder.createFolderQuery();
