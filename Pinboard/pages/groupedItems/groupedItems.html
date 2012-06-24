@@ -24,7 +24,21 @@
         <!--<img class="item-image" src="#" data-win-bind="src: backgroundImage; alt: title" />-->
         <div class="item-overlay">
             <h4 class="item-title" data-win-bind="textContent: text"></h4>
-            <!--<h6 class="item-subtitle win-type-ellipsis" data-win-bind="textContent: group"></h6>-->
+            <h6 class="item-subtitle win-type-ellipsis" data-win-bind="textContent: type"></h6>
+        </div>
+    </div>
+    <div class="texttemplate" data-win-control="WinJS.Binding.Template">
+        <div class="text">
+            <p class="item-text" data-win-bind="textContent: text"></p>
+        </div>
+    </div>
+    <div class="phototemplate" data-win-control="WinJS.Binding.Template">
+        <div class="photo">
+            <img class="item-image" src="#" data-win-bind="src: photo; alt: title" />
+            <div class="item-overlay">
+                <h4 class="item-title" data-win-bind="textContent: text"></h4>
+                <h6 class="item-subtitle win-type-ellipsis" data-win-bind="textContent: type"></h6>
+            </div>
         </div>
     </div>
 
