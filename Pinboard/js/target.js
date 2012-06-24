@@ -105,7 +105,10 @@
         var roamingFolder = applicationData.roamingFolder;
         var filename = "file" + Math.floor(Math.random() * 1024 * 1024);
         var jsonData = JSON.stringify({
-            "title": shareOperation.data.properties.title,
+            "version": 1,
+            "date": new Date(),
+            "type": "text",
+            "text": shareOperation.data.properties.title,
         });
         WinJS.Application.roaming.writeText(filename, jsonData).done(
             function success() {
